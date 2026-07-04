@@ -1,0 +1,29 @@
+services:
+  # NOTE (Windows/Docker Desktop):
+  # If you see an error about npipe/dockerDesktopLinuxEngine, start Docker Desktop first.
+  postgres:
+    image: pgvector/pgvector:pg16
+    container_name: AIhub_postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_DB: aihub
+      POSTGRES_USER: aihub
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-change-me-locally}
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  redis:
+    image: redis:7-alpine
+    container_name: AIhub_redis
+    restart: unless-stopped
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+
+volumes:
+  postgres_data:
+  redis_data:
+

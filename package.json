@@ -1,0 +1,23 @@
+{
+  "name": "aihub",
+  "private": true,
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "scripts": {
+    "dev": "npx concurrently -n api,web -c \"#8b5cf6,#22d3ee\" \"npm run dev -w @aihub/api\" \"npm run dev -w @aihub/web\"",
+    "build": "npm run build -ws",
+    "lint": "npm run lint -ws",
+    "typecheck": "npm run typecheck -ws",
+    "db:up": "docker compose up -d",
+    "db:down": "docker compose down",
+    "setup": "node scripts/bootstrap-env.mjs",
+    "format": "prettier -w ."
+  },
+  "devDependencies": {
+    "concurrently": "^9.2.1",
+    "prettier": "^3.6.2"
+  }
+}
+
